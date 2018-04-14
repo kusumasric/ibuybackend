@@ -17,12 +17,12 @@ public class CustomerApis {
     	
     }
 	
-	public Customer getCustomerDetailsName()
+	public Customer getCustomerDetailsName(String custname)
 	{
 		Customer customer=new Customer();
 		try {
 			con = DatabaseConnect.connection();
-			pst = con.prepareStatement("Select * from CustomersTable where customerName='cust1'");
+			pst = con.prepareStatement("Select * from CustomersTable where customerName='"+custname+"'");
 			ResultSet rs= pst.executeQuery();
 			while(rs.next()) { 
 				

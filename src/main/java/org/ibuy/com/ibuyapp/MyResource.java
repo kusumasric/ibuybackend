@@ -3,6 +3,7 @@ package org.ibuy.com.ibuyapp;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -36,13 +37,13 @@ public class MyResource {
     
     
     @GET
-    @Path("/getcust")
+    @Path("/getcust/{custname}")
     @Produces(MediaType.APPLICATION_JSON)  
-    public String getCustInfo()
+    public String getCustInfo(@PathParam("custname") String custname)
     {
  
     	Customer cus=new Customer();
-    	cus=custApi.getCustomerDetailsName();
+    	cus=custApi.getCustomerDetailsName(custname);
     	String jsonstring=gson.toJson(cus);
     	
     	return jsonstring;
@@ -61,5 +62,10 @@ public class MyResource {
     	return  "OK";
     	
     }
+    
+    
+    
+    
+    
     
 }
