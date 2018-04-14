@@ -10,7 +10,9 @@ local.properties
 .loadpath
 .recommenders
 
-DatabseConnection.java
+data/
+
+
 
 # External tool builders
 .externalToolBuilders/
