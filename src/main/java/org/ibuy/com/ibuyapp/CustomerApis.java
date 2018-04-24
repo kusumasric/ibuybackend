@@ -28,7 +28,7 @@ public class CustomerApis {
 				
 				customer.setCustomerName(rs.getString("customerName"));
 				customer.setEmail(rs.getString("email"));
-				customer.setPassword("password");
+				customer.setPassword(rs.getString("password"));
 				customer.setId(rs.getInt("id"));
 				customer.setPhone(rs.getInt("phone"));
 			}
@@ -56,7 +56,7 @@ public class CustomerApis {
 	{
 		Customer cus=new Customer();
 		cus=customer;
-		String response;
+		String response="ok";
 		try {
 			con = DatabaseConnect.connection();
 			pst = con.prepareStatement("Insert into CustomersTable(customerName,email,password,phone) values (?,?,?,?)");
@@ -66,6 +66,53 @@ public class CustomerApis {
 			pst.setInt(4, cus.getPhone());
 			pst.executeUpdate();
 			response="Succesfully inserted";
+		}catch(Exception exp)
+		{
+		
+			System.out.println("" + exp);
+			response=exp.getMessage();
+			
+		}
+		finally {
+			
+			try {
+				con.close();
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}	
+		
+		return response;
+		
+	}
+	
+	
+	public String SignIn(String customername,String password)
+	{
+		Customer customer=new Customer();
+		String response="Invalid User";
+		try {
+			con = DatabaseConnect.connection();
+			pst = con.prepareStatement("Select * from CustomersTable where customerName='"+customername+"'");
+			ResultSet rs= pst.executeQuery();
+			while(rs.next()) { 
+				
+				customer.setCustomerName(rs.getString("customerName"));
+				customer.setEmail(rs.getString("email"));
+				customer.setPassword(rs.getString("password"));
+				customer.setId(rs.getInt("id"));
+				customer.setPhone(rs.getInt("phone"));
+			}
+			
+			if(password.equals((String)customer.getPassword()))
+			{
+				response="Valid User";
+			}
+					
+			
 		}catch(Exception exp)
 		{
 		

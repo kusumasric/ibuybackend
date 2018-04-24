@@ -6,11 +6,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import Objects.Customer;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 
 /**
@@ -31,10 +36,11 @@ public class MyResource {
         return "Got it!";
     }
     
+    /* Rest Api's of Customer */
 
     Gson gson = new Gson();
     CustomerApis custApi=new CustomerApis();
-    
+    ProductApis prodApi=new ProductApis();
     
     @GET
     @Path("/getcust/{custname}")
@@ -58,14 +64,52 @@ public class MyResource {
     	Customer customerobj=new Customer();
     	customerobj= gson.fromJson(cus, Customer.class);
     	String result=custApi.Signup(customerobj);
-    	
-    	return  "OK";
+    	String status=result;
+    	return  gson.toJson(status);
     	
     }
     
     
+    @POST
+    @Path("/signIn")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String SignIn(String customerDetails)
+    
+    { 
+    	JSONParser parser = new JSONParser();
+    	JSONObject jsonObject=null;
+    	try {
+			jsonObject = (JSONObject) parser.parse(customerDetails);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	String custname="", custpass=" ";
+    	custname=(String) jsonObject.get("customerName");
+    	custpass=(String) jsonObject.get("password");
+    	String result=custApi.SignIn(custname,custpass);
+    	String status=result;
+    	return  gson.toJson(status);
+    	
+    }
     
     
+    /* Rest Api's of Product  */
     
+    @GET
+    @Path("/getProductAilse/{productname}")
+    @Produces(MediaType.APPLICATION_JSON)  
+    public String getProductAilseNo(@PathParam("productname") String productname)
+    {
+ 
+    	int productno=prodApi.getAisle(productname);
+    	JsonObject jsonobj=new JsonObject();
+    	
+    	jsonobj.addProperty("Aisleno", productno);
+    
+    	
+    	return jsonobj.toString();
+    }
     
 }

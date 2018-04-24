@@ -54,3 +54,4 @@ data/
 .cache-main
 .scala_dependencies
 .worksheet
+/target/

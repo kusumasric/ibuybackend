@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 public class DatabaseConnect {
 	
-	protected Properties prop=null;
+	protected Properties prop;
 	protected InputStream input;
 	
 	public DatabaseConnect() throws IOException
