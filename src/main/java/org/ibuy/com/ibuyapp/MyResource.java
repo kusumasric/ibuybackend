@@ -1,5 +1,8 @@
 package org.ibuy.com.ibuyapp;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -11,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import Objects.Customer;
-
+import Objects.Product;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -111,5 +114,37 @@ public class MyResource {
     	
     	return jsonobj.toString();
     }
+    
+    
+    @GET
+    @Path("/getProduct/{barcode}")
+    @Produces(MediaType.APPLICATION_JSON)  
+    public String getProduct(@PathParam("barcode") String barcode)
+    {
+ 
+    	Product prod=new Product();
+    	prod=prodApi.getProduct(barcode);
+    	String jsonstring=gson.toJson(prod);
+    
+    	
+    	return jsonstring;
+    }
+    
+    
+    @GET
+    @Path("/getAllProducts")
+    @Produces(MediaType.APPLICATION_JSON)  
+    public String getAllProduct()
+    {
+ 
+    	ArrayList<Product> products=new ArrayList<Product>();
+    	products=prodApi.getAllProduct();
+    	String jsonstring=gson.toJson(products);
+    
+    	
+    	return jsonstring;
+    }
+    
+    
     
 }
