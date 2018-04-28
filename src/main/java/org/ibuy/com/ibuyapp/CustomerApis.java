@@ -62,7 +62,7 @@ public class CustomerApis {
 			pst = con.prepareStatement("Insert into CustomersTable(customerName,email,password,phone) values (?,?,?,?)");
 			pst.setString(1,cus.getCustomerName());
 			pst.setString(2,cus.getEmail());
-			pst.setString(3, cus.getPassword());
+			pst.setString(3,cus.getPassword());
 			pst.setInt(4, cus.getPhone());
 			pst.executeUpdate();
 			response="Succesfully inserted";
