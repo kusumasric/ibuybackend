@@ -17,6 +17,7 @@ import Objects.Customer;
 import Objects.PaymentTable;
 import Objects.Product;
 import Objects.OrderTable;
+import Objects.OrderDetailsTable;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -48,6 +49,7 @@ public class MyResource {
     ProductApis prodApi=new ProductApis();
     PurchaseApi purApi=new PurchaseApi();
     OrderApi ordApi=new OrderApi();
+    OrderDetailsApi orddetApi=new OrderDetailsApi();
     
     @GET
     @Path("/getcust/{custname}")
@@ -192,8 +194,16 @@ public class MyResource {
     	
     	JSONArray products=(JSONArray)jsonObject.get("Products_Purchased");
     	
+        int productid,quantity;
     	for(int i=0;i<products.size();i++)
     	{
+    		JSONObject jsonob=(JSONObject) products.get(i);
+    		OrderDetailsTable ordtab=new OrderDetailsTable();
+    		ordtab.setOrderid(orderId);
+    		ordtab.setProductid((Long)jsonob.get("productid"));
+    		ordtab.setQuantity((Long)jsonob.get("quantity"));
+    		orddetApi.OrderDetailInsert(ordtab);
+    		
     		
     	}
     	

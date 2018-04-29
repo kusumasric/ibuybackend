@@ -26,5 +26,21 @@
 ....eg-/getProductAilse/book --gives JSON response {{"Aisleno":13}
 
 
-
+..7) Pay the bill -/pay pass the JSON object as follows 	
+	{
+    "cardHolderName":"cust1",
+    "CardNumber": 4545456655988788,
+    "amountPaid":34,
+    "qrcode": "hello word hello hello",
+    
+    "Products_Purchased": [
+        {
+            "productid":1 ,
+            "quantity":2
+        },
+        {
+            "productid":2 ,
+            "quantity":3
+        }]
+}  
 
