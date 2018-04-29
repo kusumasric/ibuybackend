@@ -9,7 +9,7 @@ public class PaymentTable {
 	int transactionId;
 	String cardHolderName;
 	Long cardNumber;
-	int amountPaid;
+	Long amountPaid;
 	Date timestamp;
 	
 	public int getTransactionId() {
@@ -30,10 +30,10 @@ public class PaymentTable {
 	public void setCardNumber(Long cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-	public int getAmountPaid() {
+	public Long getAmountPaid() {
 		return amountPaid;
 	}
-	public void setAmountPaid(int amountPaid) {
+	public void setAmountPaid(Long amountPaid) {
 		this.amountPaid = amountPaid;
 	}
 	public Date getTimestamp() {

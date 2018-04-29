@@ -14,7 +14,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import Objects.Customer;
+import Objects.PaymentTable;
 import Objects.Product;
+import Objects.OrderTable;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -44,6 +46,8 @@ public class MyResource {
     Gson gson = new Gson();
     CustomerApis custApi=new CustomerApis();
     ProductApis prodApi=new ProductApis();
+    PurchaseApi purApi=new PurchaseApi();
+    OrderApi ordApi=new OrderApi();
     
     @GET
     @Path("/getcust/{custname}")
@@ -145,6 +149,59 @@ public class MyResource {
     	return jsonstring;
     }
     
+    /* Rest Api's of Payment  */
+    
+    @POST
+    @Path("/pay")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String payment(String payment)    
+    { 
+
+    	JSONParser parser = new JSONParser();
+    	JSONObject jsonObject=null;
+    	try {
+			jsonObject = (JSONObject) parser.parse(payment);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	String cardName=(String)jsonObject.get("cardHolderName");
+    	Long cardNumber=(Long)jsonObject.get("CardNumber");
+    	Long amount=(Long)jsonObject.get("amountPaid");
+    	PaymentTable pay=new PaymentTable();
+    	pay.setCardHolderName(cardName);
+    	pay.setAmountPaid(amount);
+    	pay.setCardNumber(cardNumber);
+    	
+    	int productTableId=purApi.PaymentInsert(pay);
+    	
+    	Customer cus=custApi.getCustomerDetailsName(cardName);
+    	int custid=cus.getId();    	
+    	String qrcode=(String)jsonObject.get("qrcode");   
+    	
+    	OrderTable orderobj=new OrderTable();
+    	orderobj.setAmount(amount);
+    	orderobj.setCustomersTable_id(custid);
+    	orderobj.setPaymentTable_transactionId(productTableId);
+    	orderobj.setQrcode(qrcode);
+    	
+    	int orderId=ordApi.OrderInsert(orderobj);
+    	
+    	
+    	
+    	JSONArray products=(JSONArray)jsonObject.get("Products_Purchased");
+    	
+    	for(int i=0;i<products.size();i++)
+    	{
+    		
+    	}
+    	
+    	String result="200";
+    	String status=result;
+    	return  gson.toJson(status);
+    	
+    }
     
     
 }

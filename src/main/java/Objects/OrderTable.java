@@ -5,8 +5,8 @@ public class OrderTable {
 	int orderid;	
 	int Payment_transactionId;
 	int CustomersTable_id;
-	int amount;
-	byte[] qrcodeImg;
+	Long amount;
+	String qrcode;
 	boolean qrcodePrinted;
 	
 	
@@ -29,17 +29,17 @@ public class OrderTable {
 	public void setCustomersTable_id(int customersTable_id) {
 		CustomersTable_id = customersTable_id;
 	}
-	public int getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
-	public byte[] getQrcodeImg() {
-		return qrcodeImg;
+	public String  getQrcode() {
+		return qrcode;
 	}
-	public void setQrcodeImg(byte[] qrcodeImg) {
-		this.qrcodeImg = qrcodeImg;
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
 	}
 	public boolean isQrcodePrinted() {
 		return qrcodePrinted;
