@@ -194,13 +194,14 @@ public class MyResource {
     	
     	JSONArray products=(JSONArray)jsonObject.get("Products_Purchased");
     	
-        int productid,quantity;
+        
     	for(int i=0;i<products.size();i++)
     	{
     		JSONObject jsonob=(JSONObject) products.get(i);
     		OrderDetailsTable ordtab=new OrderDetailsTable();
     		ordtab.setOrderid(orderId);
     		ordtab.setProductid((Long)jsonob.get("productid"));
+    		ordtab.setProductName((String)jsonob.get("productName"));
     		ordtab.setQuantity((Long)jsonob.get("quantity"));
     		orddetApi.OrderDetailInsert(ordtab);
     		
@@ -211,6 +212,42 @@ public class MyResource {
     	String status=result;
     	return  gson.toJson(status);
     	
+    }
+    
+    
+    @GET
+    @Path("/getQRcode/{qrcode}")
+    @Produces(MediaType.APPLICATION_JSON)  
+    public String getQRcode(@PathParam("qrcode") String qrcode)
+    {
+    		
+    	OrderTable ordobj=new OrderTable();
+    	ordobj=ordApi.getorderDetails(qrcode);
+    	JSONObject obj = new JSONObject();
+    	obj.put("Amount", ordobj.getAmount());
+    	obj.put("Order id ", ordobj.getOrderid());
+    	obj.put("Payment Transaction Id",ordobj.getPaymentTable_transactionId());
+    	
+    	JSONArray list = new JSONArray();
+    	
+    	ArrayList<OrderDetailsTable> orders=new ArrayList<OrderDetailsTable>();
+    	orders=orddetApi.getOrderlist(ordobj.getOrderid());
+    	
+    	for(int i=0;i<orders.size();i++)
+    	{
+    		JSONObject ordjson=new JSONObject();
+    		ordjson.put("Product Name",orders.get(i).getProductName());
+    		ordjson.put("Product Id",orders.get(i).getProductid());
+    		ordjson.put("Quantity", orders.get(i).getQuantity());
+    		
+    		list.add(ordjson);
+    	}
+    	
+    	obj.put("orders", list);
+    	
+    
+    	
+    	return obj.toJSONString();
     }
     
     

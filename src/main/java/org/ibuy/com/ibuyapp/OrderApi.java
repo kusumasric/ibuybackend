@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import DbConnect.DatabaseConnect;
+import Objects.Customer;
 import Objects.OrderTable;
 
 public class OrderApi {
@@ -63,6 +64,44 @@ public class OrderApi {
 		return response;
 		
 	}
+    
+    
+    public OrderTable getorderDetails(String qrcode)
+	{
+		OrderTable ordtab=new OrderTable();
+		try {
+			con = DatabaseConnect.connection();
+			pst = con.prepareStatement("Select * from OrderTable where qrcode='"+qrcode+"'");
+			ResultSet rs= pst.executeQuery();
+			while(rs.next()) { 
+				
+				ordtab.setAmount(rs.getLong("amount"));
+				ordtab.setCustomersTable_id(rs.getInt("CustomersTable_id"));
+				ordtab.setOrderid(rs.getInt(rs.getInt("orderid")));
+				ordtab.setPaymentTable_transactionId(rs.getInt("PaymentTable_transactionId"));
+			
+				
+			}
+			
+		}
+		catch(Exception exp)
+		{
+			System.out.println(exp);
+		}
+		finally {
+			try {
+				con.close();
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return ordtab;
+	}
+    
+    
     
     
 

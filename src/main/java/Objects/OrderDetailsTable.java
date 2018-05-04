@@ -6,8 +6,14 @@ public class OrderDetailsTable {
 	int orderid;
 	Long productid;
 	Long quantity;
+	String ProductName;
 	
-	
+	public String getProductName() {
+		return ProductName;
+	}
+	public void setProductName(String productName) {
+		ProductName = productName;
+	}
 	public int getId() {
 		return id;
 	}

@@ -32,15 +32,51 @@
     "cardHolderName":"cust1",
     "CardNumber": 4545456655988788,
     "amountPaid":34,
-    "qrcode": "hello word hello hello",    
+    "qrcode": "hello word hello hello",
+    
     "Products_Purchased": [
         {
             "productid":1 ,
+            "productName":"Ball",
             "quantity":2
         },
         {
             "productid":2 ,
+            "productName" :"Hat",
             "quantity":3
         }]
-	}  
+	}
+	
+..8)To get Bill using QR code -/getQRcode/{qrcode}       -/getQRcode/helloword
+
+{
+    "Order id ": 1,
+    "Amount": 345,
+    "orders": [
+        {
+            "Product Id": 1,
+            "Product Name": "Chips",
+            "Quantity": 2
+        },
+        {
+            "Product Id": 1,
+            "Product Name": "Table",
+            "Quantity": 2
+        },
+        {
+            "Product Id": 2,
+            "Product Name": "Chair",
+            "Quantity": 1
+        },
+        {
+            "Product Id": 3,
+            "Product Name": "Coke",
+            "Quantity": 3
+        }
+    ],
+    "Payment Transaction Id": 1
+}
+ 
+	
+	
 
