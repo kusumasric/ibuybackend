@@ -47,9 +47,9 @@
         }]
 	}
 	
-..8)To get Bill using QR code -/getQRcode/{qrcode}       -/getQRcode/helloword
+..8)To get Bill using QR code -/getQRcode/{qrcode}     for example- /getQRcode/helloword
 
-{
+	{
     "Order id ": 1,
     "Amount": 345,
     "orders": [
@@ -75,8 +75,7 @@
         }
     ],
     "Payment Transaction Id": 1
-}
- 
+	} 
 	
 	
 
