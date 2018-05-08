@@ -5,7 +5,7 @@ public class Product {
 	
 	int id;
 	String productName;
-	int productprice;
+	int productPrice;
 	int weight;
 	String barcode;
 	int aisleNo;
@@ -24,10 +24,10 @@ public class Product {
 		this.productName = productName;
 	}
 	public int getProductprice() {
-		return productprice;
+		return productPrice;
 	}
 	public void setProductprice(int productprice) {
-		this.productprice = productprice;
+		this.productPrice = productprice;
 	}
 	public int getWeight() {
 		return weight;
