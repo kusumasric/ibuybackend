@@ -65,7 +65,7 @@ public class CustomerApis {
 			pst.setString(3,cus.getPassword());
 			pst.setInt(4, cus.getPhone());
 			pst.executeUpdate();
-			response="Succesfully inserted";
+			response="SuccesfullyInserted";
 		}catch(Exception exp)
 		{
 		
@@ -109,7 +109,7 @@ public class CustomerApis {
 			
 			if(password.equals((String)customer.getPassword()))
 			{
-				response="Valid User";
+				response="ValidUser";
 			}
 					
 			

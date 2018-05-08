@@ -77,7 +77,7 @@ public class OrderApi {
 				
 				ordtab.setAmount(rs.getLong("amount"));
 				ordtab.setCustomersTable_id(rs.getInt("CustomersTable_id"));
-				ordtab.setOrderid(rs.getInt(rs.getInt("orderid")));
+				ordtab.setOrderid(rs.getInt("orderid"));
 				ordtab.setPaymentTable_transactionId(rs.getInt("PaymentTable_transactionId"));
 			
 				

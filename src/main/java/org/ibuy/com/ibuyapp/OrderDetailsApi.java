@@ -22,12 +22,12 @@ public class OrderDetailsApi {
     	
     }
     
-    public int OrderDetailInsert(OrderDetailsTable orderdet)
+    public String OrderDetailInsert(OrderDetailsTable orderdet)
 	{
 		OrderDetailsTable orddet=new OrderDetailsTable();
 		orddet=orderdet;
 		
-		int  response=-1;
+		String response="";
 		try {
 			con = DatabaseConnect.connection();
 			pst = con.prepareStatement("Insert into OrderDetailsTable(OrderTable_orderid,productId,quantity,Productname) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
@@ -45,12 +45,13 @@ public class OrderDetailsApi {
 			    generatedKey = rs.getInt(1);
 			}
 			
-			response=generatedKey;
+			response="SuccessfullyPaid";
+			
 		}catch(Exception exp)
 		{
 		
 			System.out.println("" + exp);
-			
+			response=exp.getMessage();
 			
 		}
 		finally {

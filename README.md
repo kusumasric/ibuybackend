@@ -47,35 +47,25 @@
         }]
 	}
 	
-..8)To get Bill using QR code -/getQRcode/{qrcode}     for example- /getQRcode/helloword
+..8)To get Bill using QR code -/getQRcode/{qrcode}     for example- /getQRcode/hu
 
 	{
-    "Order id ": 1,
-    "Amount": 345,
+    "PaymentTransactionId": 38,
+    "Amount": 364,
     "orders": [
         {
-            "Product Id": 1,
-            "Product Name": "Chips",
-            "Quantity": 2
+            "ProductName": "Ball",
+            "Quantity": 2,
+            "ProductId": 1
         },
         {
-            "Product Id": 1,
-            "Product Name": "Table",
-            "Quantity": 2
-        },
-        {
-            "Product Id": 2,
-            "Product Name": "Chair",
-            "Quantity": 1
-        },
-        {
-            "Product Id": 3,
-            "Product Name": "Coke",
-            "Quantity": 3
+            "ProductName": "Hat",
+            "Quantity": 3,
+            "ProductId": 2
         }
     ],
-    "Payment Transaction Id": 1
-	} 
+    "Orderid ": 36
+}
 	
 	
 
