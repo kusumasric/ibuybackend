@@ -136,4 +136,40 @@ public class ProductApis {
 	
 	}
     
+    
+    public int getProductPrice(String Productname)
+	{
+    	int productprice=0;
+		
+		try {
+			con = DatabaseConnect.connection();
+			pst = con.prepareStatement("Select * from ProductsTable where productName='"+Productname +"'");
+			ResultSet rs= pst.executeQuery();
+			while(rs.next())
+			{
+				int no = rs.getInt("productPrice");
+				productprice=no;
+			}
+			
+		}
+		catch(Exception exp)
+		{
+			System.out.println(exp);
+		}
+		finally {
+			try {
+				con.close();
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return productprice;
+	
+	}
+    
+
+    
 }

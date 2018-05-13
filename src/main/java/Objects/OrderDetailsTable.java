@@ -7,7 +7,8 @@ public class OrderDetailsTable {
 	Long productid;
 	Long quantity;
 	String ProductName;
-	
+
+
 	public String getProductName() {
 		return ProductName;
 	}

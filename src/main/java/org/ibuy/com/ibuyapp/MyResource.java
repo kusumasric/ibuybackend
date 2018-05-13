@@ -207,6 +207,8 @@ public class MyResource {
     		ordtab.setProductid((Long)jsonob.get("productid"));
     		ordtab.setProductName((String)jsonob.get("productName"));
     		ordtab.setQuantity((Long)jsonob.get("quantity"));
+    		
+    		
     		result=orddetApi.OrderDetailInsert(ordtab);
     		
     		
@@ -247,6 +249,11 @@ public class MyResource {
     		ordjson.put("ProductId",orders.get(i).getProductid());
     		ordjson.put("Quantity", orders.get(i).getQuantity());
     		
+    		int prodprice=prodApi.getProductPrice((String)orders.get(i).getProductName());
+    		ordjson.put("Productprice",prodprice);
+    		Long totalcost= orders.get(i).getQuantity()* prodprice;
+    		ordjson.put("Totalcostofquantity", totalcost);
+    		
     		list.add(ordjson);
     	}
     	
@@ -256,6 +263,21 @@ public class MyResource {
     	return obj.toJSONString();
     }
     
+    
+    @GET
+    @Path("/getProductprice/{productname}")
+    @Produces(MediaType.APPLICATION_JSON)  
+    public String getProductprice(@PathParam("productname") String productname)
+    {
+ 
+    	int productno=prodApi.getProductPrice(productname);
+    	JsonObject jsonobj=new JsonObject();
+    	
+    	jsonobj.addProperty("productprice", productno);
+    
+    	
+    	return jsonobj.toString();
+    }
     
     
     

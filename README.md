@@ -48,24 +48,34 @@
 	}
 	
 ..8)GET - To get Bill using QR code -/getQRcode/{qrcode}     for example- /getQRcode/hu
-
+	
 	{
-    "PaymentTransactionId": 38,
-    "Amount": 364,
+    "PaymentTransactionId": 91,
+    "Amount": 14,
     "orders": [
         {
             "ProductName": "Ball",
-            "Quantity": 2,
-            "ProductId": 1
+            "Productprice": 4,
+            "Quantity": 4,
+            "ProductId": 1,
+            "Totalcostofquantity": 16
         },
         {
             "ProductName": "Hat",
-            "Quantity": 3,
-            "ProductId": 2
+            "Productprice": 7,
+            "Quantity": 6,
+            "ProductId": 2,
+            "Totalcostofquantity": 42
         }
     ],
-    "Orderid ": 36
+    "Orderid ": 89
+	}
+
+
+..9)GET -To get productprice - getProductprice/{productName} for example - getProductprice/ball
+
+	{
+    "productprice": 4
 }
-	
 	
 
