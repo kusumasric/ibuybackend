@@ -79,7 +79,7 @@ public class OrderApi {
 				ordtab.setCustomersTable_id(rs.getInt("CustomersTable_id"));
 				ordtab.setOrderid(rs.getInt("orderid"));
 				ordtab.setPaymentTable_transactionId(rs.getInt("PaymentTable_transactionId"));
-			
+				ordtab.setQrcodePrinted((rs.getBoolean("qrcodePrinted")));
 				
 			}
 			
@@ -101,8 +101,67 @@ public class OrderApi {
 		return ordtab;
 	}
     
+    public boolean printedQR(String qrcode)
+    {
+    	boolean result=false;
+    	try {
+  			con = DatabaseConnect.connection();
+  			pst = con.prepareStatement("UPDATE OrderTable SET qrcodePrinted=NOT qrcodePrinted WHERE qrcode='"+qrcode+"'");
+  			pst.executeUpdate();
+  			result=true;
+  			
+  		}
+  		catch(Exception exp)
+  		{
+  			System.out.println(exp);
+  		}
+  		finally {
+  			try {
+  				con.close();
+  				pst.close();
+  			} catch (SQLException e) {
+  				// TODO Auto-generated catch block
+  				e.printStackTrace();
+  			}
+  		}
+  		
+    	
+    	return result;
+    }
     
     
-    
+    public boolean getqrprinted(String qrcode)
+   	{
+   		boolean res=false;
+   		try {
+   			con = DatabaseConnect.connection();
+   			pst = con.prepareStatement("Select * from OrderTable where qrcode='"+qrcode+"'");
+   			ResultSet rs= pst.executeQuery();
+   			while(rs.next()) { 
+   				
+   			
+   				res=(rs.getBoolean("qrcodePrinted"));
+   				
+   			}
+   			
+   		}
+   		catch(Exception exp)
+   		{
+   			System.out.println(exp);
+   		}
+   		finally {
+   			try {
+   				con.close();
+   				pst.close();
+   			} catch (SQLException e) {
+   				// TODO Auto-generated catch block
+   				e.printStackTrace();
+   			}
+   		}
+   		
+   		return res;
+   	}
+       
+
 
 }

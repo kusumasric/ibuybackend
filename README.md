@@ -51,6 +51,7 @@
 	
 	{
     "PaymentTransactionId": 91,
+	"Billprinted": false,
     "Amount": 14,
     "orders": [
         {
@@ -70,12 +71,63 @@
     ],
     "Orderid ": 89
 	}
+	
+	example -/getQRcode/3
+	
+	{
+    "PaymentTransactionId": 85,
+    "Billprinted": true,
+    "Amount": 28,
+    "orders": [
+        {
+            "ProductName": "Nivea men",
+            "Productprice": 0,
+            "Quantity": 3,
+            "ProductId": 2,
+            "Totalcostofquantity": 0
+        },
+        {
+            "ProductName": "NeviaLotion",
+            "Productprice": 0,
+            "Quantity": 3,
+            "ProductId": 2,
+            "Totalcostofquantity": 0
+        },
+        {
+            "ProductName": "Deo",
+            "Productprice": 20,
+            "Quantity": 3,
+            "ProductId": 2,
+            "Totalcostofquantity": 60
+        }
+    ],
+    "Orderid ": 83
+}
 
 
 ..9)GET -To get productprice - getProductprice/{productName} for example - getProductprice/ball
 
 	{
     "productprice": 4
-}
+	}
 	
+..10)POST - Acknowledgement to the bill printed - acknowledge  passing qr code as JSON string.
+  {
+	"qrcode":"3"
 
+  }
+  
+  Reponse -
+  {
+    "result": true
+  }
+
+ ..11) GET - Whether to know bill printed or not based on qrcode -/getbillprinted/hu
+	
+	Response-
+	{
+		"result":false
+	}
+ 
+ 
+  

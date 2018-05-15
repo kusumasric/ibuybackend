@@ -236,7 +236,7 @@ public class MyResource {
     	obj.put("Amount", ordobj.getAmount());
     	obj.put("Orderid ", ordobj.getOrderid());
     	obj.put("PaymentTransactionId",ordobj.getPaymentTable_transactionId());
-    	
+    	obj.put("Billprinted", ordobj.isQrcodePrinted());
     	JSONArray list = new JSONArray();
     	
     	ArrayList<OrderDetailsTable> orders=new ArrayList<OrderDetailsTable>();
@@ -279,6 +279,44 @@ public class MyResource {
     	return jsonobj.toString();
     }
     
+    
+    @POST
+    @Path("/acknowledge")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String printAcknowlede(String qrcode)    
+    { 
+    	JSONParser parser = new JSONParser();
+    	JSONObject jsonObject=null;
+    	try {
+			jsonObject = (JSONObject) parser.parse(qrcode);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	boolean res=ordApi.printedQR((String)(jsonObject.get("qrcode")));
+    	JSONObject obj = new JSONObject();
+    	obj.put("result", res);
+    	return  obj.toJSONString();
+    	
+    }
+    
+    
+    @GET
+    @Path("/getbillprinted/{qrcode}")
+    @Produces(MediaType.APPLICATION_JSON)  
+    public String getbillprinted(@PathParam("qrcode") String qrcode)
+    {
+ 
+    	boolean result=false;
+    	result=ordApi.getqrprinted(qrcode);
+    	
+    	
+    	JSONObject obj = new JSONObject();
+    	obj.put("result", result);
+    	return  obj.toJSONString();
+    	
+    	
+    }
     
     
     
